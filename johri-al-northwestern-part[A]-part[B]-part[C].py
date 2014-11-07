@@ -27,12 +27,9 @@ def rotateY(x, y, z, theta):
 	z = -sin(theta) * x + cos(theta) * z
 	return x,y,z
 
-def make_figure_and_subplot(threeD=False):
+def make_figure_and_subplot(projection='rectilinear'):
 	fig = plt.figure(figsize=(1024/DPI, 1024/DPI), dpi=DPI)
-	if threeD:
-		ax = fig.add_subplot(111, projection='3d')
-	else:
-		ax = fig.add_subplot(111, projection='rectilinear')
+	ax = fig.add_subplot(111, projection=projection)
 	ax.set_axis_bgcolor('black')
 	return fig, ax
 
@@ -91,7 +88,7 @@ if __name__ == "__main__":
 
 	# 3d plot
 	print "creating 3 dimensional plot"
-	fig1, ax1 = make_figure_and_subplot(True)
+	fig1, ax1 = make_figure_and_subplot('3d')
 	for face in faces:
 		face_points = np.array((points[face[0]], points[face[1]], points[face[2]]))
 		ax1.plot_wireframe(face_points[:,0], face_points[:,1], face_points[:,2])
